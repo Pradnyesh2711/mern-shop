@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = '/api/orders'
+const baseUrl = 'http://localhost:5000/api/orders'
 
 let token = null
 
