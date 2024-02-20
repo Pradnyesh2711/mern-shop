@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Women's Striped Maxi Dress",
+    "description": "Stylish maxi dress featuring classic striped pattern. Perfect for beach outings or casual gatherings. Made from lightweight and breathable fabric for all-day comfort.",
+    "imagePath": "https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F4b%2F64%2F4b64f3eb36377d52ea5aca71097bb565f077034a.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bladies_dresses_maxidresses%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]",
+    "createdAt": "2024-02-19T10:21:45.123Z",
+    "user": "65d205eef119cc2fee21c91b",
+    "price": 79.99
+  },
+  {
+    "name": "Women's Ruffle Sleeve Blouse",
+    "description": "Chic blouse with ruffle sleeves, adding a touch of elegance to any outfit. Versatile piece suitable for both work and leisure. Made from soft and flowy material for a flattering fit.",
+    "imagePath": "https://in.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-floral-print-ruffle-trim-blouse-ready-to-wear--FQTP04GST002_PM1_Cropped%20view.jpg",
+    "createdAt": "2024-02-19T15:55:12.789Z",
+    "user": "65d205eef119cc2fee21c91b",
+    "price": 49.99
+  },
+  {
+    "name": "Women's High-Waisted Skinny Jeans",
+    "description": "Classic high-waisted skinny jeans designed for comfort and style. Versatile and easy to pair with any top. Made from stretch denim for a flattering fit.",
+    "imagePath": "https://sslimages.shoppersstop.com/sys-master/images/ha6/hfc/29895617380382/DOSS23DE9959115_BLUE_DENIM_alt1.jpg_2000Wx3000H",
+    "createdAt": "2024-02-20T09:40:57.235Z",
+    "user": "65d205eef119cc2fee21c91b",
+    "price": 69.99
+  },
+  {
+    "name": "Men's Slim Fit Oxford Shirt",
+    "description": "Classic oxford shirt tailored for a slim fit. Versatile enough for both casual and formal occasions. Made from high-quality cotton for comfort and durability.",
+    "imagePath": "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/27254322/2024/1/29/6fc861eb-78af-4ea1-bad1-dbf9b0f2c0841706552809419SHOWOFFMenStandardSlimFitOpaqueStripedCasualShirt1.jpg",
+    "createdAt": "2024-02-20T12:30:15.789Z",
+    "user": "65d205eef119cc2fee21c91b",
+    "price": 59.99
+  },
+  {
+    "name": "Men's Lightweight Bomber Jacket",
+    "description": "Stylish bomber jacket perfect for layering. Features a lightweight design suitable for transitional weather. Made from water-resistant material for added functionality.",
+    "imagePath": "https://adn-static1.nykaa.com/nykdesignstudio-images/pub/media/catalog/product/e/2/tr:w-270,/e2a8ba9MJ-22-1872215OLIVE_4.jpg?rnd=20200526195200",
+    "createdAt": "2024-02-20T14:45:30.456Z",
+    "user": "65d205eef119cc2fee21c91b",
+    "price": 89.99
+  },
+  {
+    "name": "Men's Straight Leg Jeans",
+    "description": "Classic straight leg jeans crafted for a timeless look. Versatile and comfortable for everyday wear. Made from premium denim for durability.",
+    "imagePath": "https://i.pinimg.com/736x/6f/1e/08/6f1e08ba0b25eac5842475ba2081d17b.jpg",
+    "createdAt": "2024-02-20T16:10:55.321Z",
+    "user": "65d205eef119cc2fee21c91b",
+    "price": 79.99
+  }
+]
