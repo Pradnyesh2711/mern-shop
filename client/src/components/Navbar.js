@@ -116,7 +116,7 @@ const Navbar = () => {
         </div>
         <div className="flex-1">
           <Link to="/" className="normal-case text-lg">
-            <span className="text-2xl">🪐</span>CENTAURIUM
+            <span className="text-2xl">🪐</span>Fashion Street
           </Link>
         </div>
         <div className="flex">
