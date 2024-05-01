@@ -2,6 +2,7 @@ const logger = require('./logger')
 const jwt = require('jsonwebtoken')
 
 const User = require('../models/user')
+const mutualexclusion = require('../models/mutualexclusion')
 const SECRET = require('./config').SECRET
 
 const unknownEndpoint = (request, response) => {
@@ -39,6 +40,50 @@ const productDataExtractor = (request, response, next) => {
   }
   next()
 }
+
+
+const mutualExclusionUpdater = async (request, response, next) => {
+  const user_id = request.user._id
+  const product_id = request.params.id
+  const mutualExclusion = await mutualexclusion.findOne({ product_id: product_id, user_id: user_id })
+  console.log(mutualExclusion);
+  console.log(user_id);
+  if (mutualExclusion?.user_id.toString() == user_id.toString()) {
+    return response.status(200).json({ ok: true, message: 'Product is now locked for editing' })
+  } else if (mutualExclusion) {
+    return response.status(403).json({ ok: false, message: `${request.user.name} is currently updating this product, Try after sometime...` })
+  } else {
+    const newMutualExclusion = new mutualexclusion({
+      product_id: product_id,
+      user_id: user_id
+    })
+    await newMutualExclusion.save()
+    return response.status(200).json({ ok: true, message: 'Product is now locked for editing' })
+  }
+}
+
+const mutualExclusionChecker = async (request, response, next) => {
+  const user_id = request.user._id
+  const product_id = request.params.id
+  const mutualExclusion = await mutualexclusion.findOne({ product_id: product_id, user_id: user_id })
+  if (mutualExclusion && mutualExclusion.user_id.toString() != user_id.toString()) {
+    return response.status(403).json({ ok: true, message: `${request.user.name} is currently updating this product, Try after sometime...` })
+  } else {
+
+    next()
+  }
+}
+
+const mutualExclusionDeleter = async (request, response, next) => {
+  const user_id = request.user._id
+  const product_id = request.params.id
+  await mutualexclusion.findOneAndDelete({ product_id: product_id, user_id: user_id })
+  return response.status(200).json(request.updatedProduct)
+
+}
+
+
+
 
 const tokenExtractor = (request, response, next) => {
   const authorization = request.get('authorization')
@@ -78,4 +123,7 @@ module.exports = {
   userExtractor,
   productDataExtractor,
   orderDataExtractor,
+  mutualExclusionUpdater,
+  mutualExclusionChecker,
+  mutualExclusionDeleter
 }

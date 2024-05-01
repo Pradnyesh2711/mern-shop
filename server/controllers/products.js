@@ -1,4 +1,4 @@
-const { productDataExtractor, userExtractor } = require('../utils/middleware')
+const { productDataExtractor, userExtractor, mutualExclusionUpdater, mutualExclusionChecker, mutualExclusionDeleter } = require('../utils/middleware')
 const productsRouter = require('express').Router()
 const Product = require('../models/product')
 
@@ -34,19 +34,30 @@ productsRouter.post(
   }
 )
 
+productsRouter.post(
+  '/:id/start_editing',
+  userExtractor,
+  productDataExtractor,
+  mutualExclusionUpdater
+)
+
 productsRouter.put(
   '/:id',
   userExtractor,
   productDataExtractor,
-  async (request, response) => {
-    const updatedProudct = await Product.findByIdAndUpdate(
+  mutualExclusionChecker,
+  async (request, response, next) => {
+    const updatedProduct = await Product.findByIdAndUpdate(
       request.params.id,
       request.product,
       { new: true }
     )
+    request.updatedProduct = updatedProduct
+    next()
 
-    response.status(200).json(updatedProudct)
-  }
+  },
+  mutualExclusionDeleter
+
 )
 
 productsRouter.delete('/:id', userExtractor, async (request, response) => {
