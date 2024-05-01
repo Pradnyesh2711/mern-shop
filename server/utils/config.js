@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-const PORT = 5000
+const PORT = process.env.PORT || 5000
 
 const MONGODB_URI = "mongodb+srv://pradnyeshjain:Pradnyesh@cluster0.unpt62k.mongodb.net/?retryWrites=true&w=majority"
 const SECRET = "secret"
