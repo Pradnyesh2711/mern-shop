@@ -13,6 +13,7 @@ const ProductsTab = () => {
 
   const handleSave = async (product, clearForm) => {
     try {
+
       const returnedProduct = await productService.create(product)
       setProducts(state => [returnedProduct, ...state])
       setAlert({

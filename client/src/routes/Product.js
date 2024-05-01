@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal'; // Import react-modal library
 import { useLoaderData } from 'react-router-dom';
 import { BsFillCartPlusFill } from 'react-icons/bs';
@@ -8,6 +8,7 @@ import axios from 'axios'; // Import Axios for making HTTP requests
 import Breadcrumb from '../components/Breadcrumb';
 import { cartActions } from '../store/cart-slice';
 import { numberWithCommas } from '../utils';
+import reqq from "../services/products";
 
 const customStyles = {
   content: {
@@ -17,12 +18,12 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
-    backgroundColor: '#fff', 
-    boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.75)', 
-    padding: '40px', 
-    borderRadius: '8px', 
-    width: '80%', 
-    maxWidth: '500px', 
+    backgroundColor: '#fff',
+    boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.75)',
+    padding: '40px',
+    borderRadius: '8px',
+    width: '80%',
+    maxWidth: '500px',
   },
   overlay: {
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -31,7 +32,7 @@ const customStyles = {
 
 const Product = () => {
   const product = useLoaderData();
-  const { _id, name: initialName, price: initialPrice, description: initialDescription, imagePath } = product;
+  const { id, name: initialName, price: initialPrice, description: initialDescription, imagePath } = product;
   const dispatch = useDispatch();
 
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -39,8 +40,19 @@ const Product = () => {
   const [price, setPrice] = useState(initialPrice);
   const [description, setDescription] = useState(initialDescription);
 
-  const openModal = () => {
-    setIsOpen(true);
+
+
+
+  const openModal = async () => {
+    const dt = await reqq.startEditing(id);
+    console.log("dt: ", dt)
+    if (dt.ok) {
+      setIsOpen(true);
+    }
+    else {
+      alert(dt.message);
+    }
+    // setIsOpen(true);
   };
 
   const closeModal = () => {
@@ -51,10 +63,15 @@ const Product = () => {
     dispatch(cartActions.add(product));
   };
 
-  const handleSave = async () => {
+  const handleSave = async (e) => {
+    e.preventDefault();
     try {
       // Make API call to update product data
-      await axios.put(`/api/products/${_id}`, { name, price, description });
+
+      const pr = { ...product, name, price, description, };
+      console.log(pr)
+      await reqq.updateProduct(id, pr);
+      // await axios.put(`http://localhost:5000/api/products/${id}`, pr);
       closeModal();
     } catch (error) {
       console.error('Error saving product:', error);
@@ -101,18 +118,19 @@ const Product = () => {
         contentLabel="Edit Product Modal"
       >
         <h2>Edit Product</h2>
-        <form className="flex flex-col">
+        <form className="flex flex-col" onSubmit={handleSave}
+        >
           <label htmlFor="name" className="mb-2">Name:</label>
           <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} className="mb-4 p-2 border border-gray-300 rounded-md" />
 
           <label htmlFor="price" className="mb-2">Price:</label>
-          <input type="number" id="price" value={price} onChange={(e) => setPrice(e.target.value)} className="mb-4 p-2 border border-gray-300 rounded-md" />
+          <input type="number" id="price" value={price} onChange={(e) => setPrice(parseInt(e.target.value))} className="mb-4 p-2 border border-gray-300 rounded-md" />
 
           <label htmlFor="description" className="mb-2">Description:</label>
           <textarea id="description" value={description} onChange={(e) => setDescription(e.target.value)} className="mb-4 p-2 border border-gray-300 rounded-md" />
 
           <div className="flex justify-between">
-            <button className="btn btn-primary" onClick={handleSave}>Save</button>
+            <button className="btn btn-primary" type='submit'>Save</button>
             <button className="btn btn-secondary" onClick={handleCancel}>Cancel</button>
           </div>
         </form>

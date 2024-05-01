@@ -45,13 +45,15 @@ const productDataExtractor = (request, response, next) => {
 const mutualExclusionUpdater = async (request, response, next) => {
   const user_id = request.user._id
   const product_id = request.params.id
-  const mutualExclusion = await mutualexclusion.findOne({ product_id: product_id, user_id: user_id })
+  const mutualExclusion = await mutualexclusion.findOne({ product_id: product_id })
   console.log(mutualExclusion);
   console.log(user_id);
   if (mutualExclusion?.user_id.toString() == user_id.toString()) {
     return response.status(200).json({ ok: true, message: 'Product is now locked for editing' })
   } else if (mutualExclusion) {
-    return response.status(403).json({ ok: false, message: `${request.user.name} is currently updating this product, Try after sometime...` })
+    const user = await User.findById(mutualExclusion.user_id);
+
+    return response.status(403).json({ ok: false, message: `${user?.name} is currently updating this product, Try after sometime...` })
   } else {
     const newMutualExclusion = new mutualexclusion({
       product_id: product_id,

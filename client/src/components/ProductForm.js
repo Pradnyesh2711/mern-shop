@@ -21,6 +21,7 @@ const ProductForm = ({ onCancel, onSubmit, alert }) => {
 
   const handleSubmit = e => {
     e.preventDefault()
+    console.log(product);
     onSubmit(product, clearInputs)
   }
 
@@ -68,23 +69,25 @@ const ProductForm = ({ onCancel, onSubmit, alert }) => {
               onChange={handleProductChange('description')}
               required
             />
+
+            <div className="modal-action">
+              <label
+                htmlFor="my-modal"
+                className="btn btn-ghost"
+                onClick={onCancel}
+              >
+                Cancel
+              </label>
+              <button
+                className="btn btn-primary"
+                form="product-form"
+                type="submit"
+              >
+                Save
+              </button>
+            </div>
           </form>
-          <div className="modal-action">
-            <label
-              htmlFor="my-modal"
-              className="btn btn-ghost"
-              onClick={onCancel}
-            >
-              Cancel
-            </label>
-            <button
-              className="btn btn-primary"
-              form="product-form"
-              type="submit"
-            >
-              Save
-            </button>
-          </div>
+
         </div>
       </div>
     </Fragment>
