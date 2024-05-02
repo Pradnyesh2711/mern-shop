@@ -12,6 +12,9 @@ import Register from './routes/Register'
 import Order from './routes/Order'
 import Admin from './routes/Admin'
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -51,8 +54,13 @@ const router = createBrowserRouter([
   },
 ])
 
+console.log(process.env.REACT_APP_BASE_URL);
+
 function App() {
-  return <RouterProvider router={router} />
+  return <>
+    <RouterProvider router={router} />
+    <ToastContainer />
+  </>
 }
 
 export default App

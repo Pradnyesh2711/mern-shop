@@ -7,6 +7,7 @@ import CartProducts from '../components/CartProducts'
 import Checkout from '../components/Checkout'
 import orderService from '../services/orders'
 import { cartActions } from '../store/cart-slice'
+import { toast } from 'react-toastify'
 
 const Cart = () => {
   const [orderState, setOrderState] = useState(null)
@@ -33,7 +34,8 @@ const Cart = () => {
         dispatch(cartActions.clear())
       } catch (err) {
         console.log(err)
-        alert(err)
+        // alert(err)
+        toast.error(err, { autoClose: 3000 })
       }
     } else {
       navigate('/login')

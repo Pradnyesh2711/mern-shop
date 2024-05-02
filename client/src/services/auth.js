@@ -1,6 +1,6 @@
 import axios from 'axios'
-const loginUrl = 'http://localhost:5000/api/login'
-const registerUrl = 'http://localhost:5000/api/users'
+const loginUrl = `${process.env.REACT_APP_BASE_URL}/api/login`
+const registerUrl = `${process.env.REACT_APP_BASE_URL}/api/users`
 
 const login = async user => {
   const request = axios.post(loginUrl, user)

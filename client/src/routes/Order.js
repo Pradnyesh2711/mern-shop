@@ -4,6 +4,7 @@ import Badge from '../components/Badge'
 
 import OrderProduct from '../components/OrderProduct'
 import orderService from '../services/orders'
+import { toast } from 'react-toastify'
 
 const Order = () => {
   const [orders, setOrders] = useState([])
@@ -18,7 +19,8 @@ const Order = () => {
       setOrders(result)
       setLoading(false)
     } catch (err) {
-      alert(err)
+      // alert(err)
+      toast.error(err, { autoClose: 3000 })
       setLoading(false)
     }
   }, [user])

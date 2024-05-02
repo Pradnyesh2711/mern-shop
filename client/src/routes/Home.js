@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import Products from '../components/Products'
 import productService from '../services/products'
 import LoadingButton from '../components/LoadingButton'
+import { toast } from 'react-toastify'
 
 const Home = () => {
   const [products, setProducts] = useState([])
@@ -15,7 +16,8 @@ const Home = () => {
       setProducts(result)
       setLoading(false)
     } catch (error) {
-      alert(error)
+      // alert(error)
+      toast.error(error, { autoClose: 3000 })
       setLoading(false)
     }
   }

@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:5000/api/orders'
+const baseUrl = `${process.env.REACT_APP_BASE_URL}/api/orders`
 
 let token = null
 

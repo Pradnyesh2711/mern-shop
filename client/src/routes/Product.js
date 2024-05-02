@@ -9,6 +9,7 @@ import Breadcrumb from '../components/Breadcrumb';
 import { cartActions } from '../store/cart-slice';
 import { numberWithCommas } from '../utils';
 import reqq from "../services/products";
+import { toast } from 'react-toastify';
 
 const customStyles = {
   content: {
@@ -48,9 +49,11 @@ const Product = () => {
     console.log("dt: ", dt)
     if (dt.ok) {
       setIsOpen(true);
+      toast.success(dt.message, { autoClose: 3000 });
     }
     else {
-      alert(dt.message);
+      toast.error(dt.message, { autoClose: 3000 });
+      // alert(dt.message);
     }
     // setIsOpen(true);
   };
